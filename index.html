@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -7,8 +8,44 @@
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css">
     <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        // Smooth page transitions
+        document.addEventListener('DOMContentLoaded', function() {
+            // Handle internal links
+            document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+                anchor.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    const target = document.querySelector(this.getAttribute('href'));
+                    const headerOffset = 80;
+                    const elementPosition = target.getBoundingClientRect().top;
+                    const offsetPosition = elementPosition + window.pageYOffset - headerOffset;
+
+                    window.scrollTo({
+                        top: offsetPosition,
+                        behavior: 'smooth'
+                    });
+                });
+            });
+
+            // Flashcard flip animation
+            document.querySelectorAll('.flashcard').forEach(card => {
+                card.addEventListener('click', function() {
+                    this.classList.toggle('flipped');
+                });
+            });
+        });
+
+        // View transitions for page sections
+        function showSection(sectionId) {
+            document.querySelectorAll('.page-section').forEach(section => {
+                section.style.display = 'none';
+            });
+            document.getElementById(sectionId).style.display = 'block';
+            window.scrollTo({top: 0, behavior: 'smooth'});
+        }
+    </script>
     <style>
-        .flashcard {
+.flashcard {
             perspective: 1000px;
             transition: transform 0.6s;
             transform-style: preserve-3d;
@@ -28,8 +65,24 @@
     </style>
 </head>
 <body class="bg-gray-50 font-inter">
-    <div class="container mx-auto px-4 py-8 max-w-3xl">
-        <header class="mb-8 text-center">
+    <!-- Navigation -->
+    <nav class="bg-white shadow-sm sticky top-0 z-10">
+        <div class="container mx-auto px-4">
+            <div class="flex justify-between items-center h-16">
+                <a href="#home-section" class="text-xl font-bold text-indigo-600">Flashcard Master</a>
+                <div class="flex space-x-4">
+                    <a href="#home-section" class="px-3 py-2 text-gray-700 hover:text-indigo-600 transition">Home</a>
+                    <a href="#browse-section" class="px-3 py-2 text-gray-700 hover:text-indigo-600 transition">Browse</a>
+                    <a href="#create-section" class="px-3 py-2 text-gray-700 hover:text-indigo-600 transition">Create</a>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Home Section -->
+    <section id="home-section" class="page-section">
+        <div class="container mx-auto px-4 py-8 max-w-3xl">
+<header class="mb-8 text-center">
             <h1 class="text-4xl font-bold text-indigo-600 mb-2">Flashcard Master</h1>
             <p class="text-gray-600">Enhance your learning with interactive flashcards</p>
         </header>
@@ -67,23 +120,146 @@
 
             <!-- Action Buttons -->
             <div class="flex justify-center gap-4">
-                <button class="px-6 py-3 bg-indigo-600 text-white rounded-lg hover:bg-indigo-700 transition animate__animated animate__pulse">
-                    Create New Set
-                </button>
-                <button class="px-6 py-3 border border-indigo-600 text-indigo-600 rounded-lg hover:bg-indigo-50 transition">
-                    Browse Sets
-                </button>
+            <button onclick="showSection('create-section')" class="px-6 py-3 bg-indigo-600 text-white rounded-lg hover:bg-indigo-700 transition animate__animated animate__pulse">
+                Create New Set
+            </button>
+            <button onclick="showSection('browse-section')" class="px-6 py-3 border border-indigo-600 text-indigo-600 rounded-lg hover:bg-indigo-50 transition">
+                Browse Sets
+            </button>
+</div>
+        </div>
+    </section>
+
+    <!-- Browse Section -->
+    <section id="browse-section" class="page-section" style="display: none;">
+        <div class="container mx-auto px-4 py-8">
+            <header class="mb-8">
+                <h1 class="text-3xl font-bold text-indigo-600 mb-2">Browse Flashcard Sets</h1>
+                <div class="flex justify-between items-center">
+                    <p class="text-gray-600">Find sets to study or create your own</p>
+                    <button onclick="showSection('create-section')" class="px-4 py-2 bg-indigo-600 text-white rounded-lg hover:bg-indigo-700 transition">
+                        Create New Set
+                    </button>
+                </div>
+            </header>
+
+            <div class="mb-6">
+                <div class="relative">
+                    <input type="text" class="w-full px-4 py-3 pl-10 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500" placeholder="Search flashcard sets...">
+                    <svg class="absolute left-3 top-3.5 h-5 w-5 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path>
+                    </svg>
+                </div>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                <!-- Set Cards -->
+                <div class="bg-white rounded-xl shadow-md overflow-hidden hover:shadow-lg transition">
+                    <div class="p-6">
+                        <h2 class="text-xl font-semibold text-gray-800 mb-2">French Vocabulary</h2>
+                        <p class="text-gray-600 mb-4">Basic French words and phrases</p>
+                        <div class="flex justify-between items-center">
+                            <span class="text-sm text-gray-500">24 cards</span>
+                            <button onclick="showSection('home-section')" class="px-3 py-1 bg-indigo-600 text-white text-sm rounded-lg hover:bg-indigo-700 transition">
+                                Study
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- More set cards would go here -->
             </div>
         </div>
-    </div>
+    </section>
 
-    <script>
-        // Simple flip animation
-        document.querySelectorAll('.flashcard').forEach(card => {
-            card.addEventListener('click', function() {
-                this.classList.toggle('flipped');
-            });
-        });
-    </script>
+    <!-- Create Section -->
+    <section id="create-section" class="page-section" style="display: none;">
+        <div class="container mx-auto px-4 py-8 max-w-3xl">
+            <header class="mb-8">
+                <h1 class="text-3xl font-bold text-indigo-600 mb-2">Create New Flashcard Set</h1>
+                <p class="text-gray-600">Add terms and definitions to create your custom study set</p>
+            </header>
+
+            <div class="bg-white rounded-xl shadow-md overflow-hidden p-6 mb-6">
+                <div class="mb-4">
+                    <label class="block text-gray-700 font-medium mb-2">Set Title</label>
+                    <input type="text" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500" placeholder="Enter set title">
+                </div>
+
+                <div class="mb-4">
+                    <label class="block text-gray-700 font-medium mb-2">Description</label>
+                    <textarea class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500" rows="2" placeholder="Optional description"></textarea>
+                </div>
+            </div>
+
+            <div class="bg-white rounded-xl shadow-md overflow-hidden p-6">
+                <h2 class="text-xl font-semibold text-gray-800 mb-4">Add Flashcards</h2>
+                
+                <div class="mb-4">
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
+                        <div>
+                            <label class="block text-gray-700 font-medium mb-2">Term</label>
+                            <input type="text" class="flashcard-input w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none" placeholder="Enter term">
+                        </div>
+                        <div>
+                            <label class="block text-gray-700 font-medium mb-2">Definition</label>
+                            <input type="text" class="flashcard-input w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none" placeholder="Enter definition">
+                        </div>
+                    </div>
+                    <button class="px-4 py-2 bg-indigo-600 text-white rounded-lg hover:bg-indigo-700 transition w-full mb-6">
+                        Add Flashcard
+                    </button>
+                </div>
+
+                <div class="border border-gray-200 rounded-lg p-4 mb-6">
+                    <h3 class="font-medium text-gray-700 mb-3">Flashcard Preview</h3>
+                    <div class="relative h-40 bg-indigo-50 rounded-lg flex items-center justify-center cursor-pointer flashcard">
+                        <div class="flashcard-face front flex items-center justify-center w-full h-full">
+                            <p class="text-lg text-indigo-600">Term and definition will appear here</p>
+                        </div>
+                        <div class="flashcard-face back flex items-center justify-center w-full h-full bg-indigo-100">
+                            <p class="text-lg text-indigo-700">Definition will appear here</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="flex justify-end gap-3">
+                    <button onclick="showSection('home-section')" class="px-6 py-2 border border-gray-300 text-gray-700 rounded-lg hover:bg-gray-50 transition">
+                        Cancel
+                    </button>
+                    <button class="px-6 py-2 bg-indigo-600 text-white rounded-lg hover:bg-indigo-700 transition">
+                        Save Set
+                    </button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <style>
+        .flashcard {
+            perspective: 1000px;
+            transition: transform 0.6s;
+            transform-style: preserve-3d;
+        }
+        .flashcard.flipped {
+            transform: rotateY(180deg);
+        }
+        .flashcard-face {
+            backface-visibility: hidden;
+            position: absolute;
+            width: 100%;
+            height: 100%;
+        }
+        .flashcard-back {
+            transform: rotateY(180deg);
+        }
+        .flashcard-input {
+            transition: all 0.3s ease;
+        }
+        .flashcard-input:focus {
+            box-shadow: 0 0 0 2px rgba(79, 70, 229, 0.5);
+        }
+    </style>
 </body>
 </html>
+
