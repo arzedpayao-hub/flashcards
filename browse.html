@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Browse Flashcards | Flashcard Master</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-gray-50 font-inter">
+    <div class="container mx-auto px-4 py-8">
+        <header class="mb-8">
+            <h1 class="text-3xl font-bold text-indigo-600 mb-2">Browse Flashcard Sets</h1>
+            <div class="flex justify-between items-center">
+                <p class="text-gray-600">Find sets to study or create your own</p>
+                <a href="create.html" class="px-4 py-2 bg-indigo-600 text-white rounded-lg hover:bg-indigo-700 transition">
+                    Create New Set
+                </a>
+            </div>
+        </header>
+
+        <!-- Search -->
+        <div class="mb-6">
+            <div class="relative">
+                <input type="text" class="w-full px-4 py-3 pl-10 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500" placeholder="Search flashcard sets...">
+                <svg class="absolute left-3 top-3.5 h-5 w-5 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path>
+                </svg>
+            </div>
+        </div>
+
+        <!-- Flashcard Sets Grid -->
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+            <!-- Set Card 1 -->
+            <div class="bg-white rounded-xl shadow-md overflow-hidden hover:shadow-lg transition">
+                <div class="p-6">
+                    <h2 class="text-xl font-semibold text-gray-800 mb-2">French Vocabulary</h2>
+                    <p class="text-gray-600 mb-4">Basic French words and phrases</p>
+                    <div class="flex justify-between items-center">
+                        <span class="text-sm text-gray-500">24 cards</span>
+                        <a href="index.html" class="px-3 py-1 bg-indigo-600 text-white text-sm rounded-lg hover:bg-indigo-700 transition">
+                            Study
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Set Card 2 -->
+            <div class="bg-white rounded-xl shadow-md overflow-hidden hover:shadow-lg transition">
+                <div class="p-6">
+                    <h2 class="text-xl font-semibold text-gray-800 mb-2">Chemistry Elements</h2>
+                    <p class="text-gray-600 mb-4">Periodic table elements and properties</p>
+                    <div class="flex justify-between items-center">
+                        <span class="text-sm text-gray-500">50 cards</span>
+                        <a href="index.html" class="px-3 py-1 bg-indigo-600 text-white text-sm rounded-lg hover:bg-indigo-700 transition">
+                            Study
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Set Card 3 -->
+            <div class="bg-white rounded-xl shadow-md overflow-hidden hover:shadow-lg transition">
+                <div class="p-6">
+                    <h2 class="text-xl font-semibold text-gray-800 mb-2">History Dates</h2>
+                    <p class="text-gray-600 mb-4">Important historical events and dates</p>
+                    <div class="flex justify-between items-center">
+                        <span class="text-sm text-gray-500">30 cards</span>
+                        <a href="index.html" class="px-3 py-1 bg-indigo-600 text-white text-sm rounded-lg hover:bg-indigo-700 transition">
+                            Study
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Set Card 4 -->
+            <div class="bg-white rounded-xl shadow-md overflow-hidden hover:shadow-lg transition">
+                <div class="p-6">
+                    <h2 class="text-xl font-semibold text-gray-800 mb-2">Math Formulas</h2>
+                    <p class="text-gray-600 mb-4">Algebra and geometry formulas</p>
+                    <div class="flex justify-between items-center">
+                        <span class="text-sm text-gray-500">15 cards</span>
+                        <a href="index.html" class="px-3 py-1 bg-indigo-600 text-white text-sm rounded-lg hover:bg-indigo-700 transition">
+                            Study
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
